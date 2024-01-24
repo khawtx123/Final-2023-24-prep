@@ -67,7 +67,28 @@ class MyForm(QtWidgets.QDialog):
 		self.ui.setupUi(self)
 
 		# Continue with your code here.
+		self.ui.lneWeight.textChanged.connect(self.weight_changed)
+		self.ui.lneHeight.textChanged.connect(self.height_changed)
+		self.ui.pbtCalculate.clicked.connect(self.calc_clicked)
+		self.height = float(self.ui.lneHeight.text())
+		self.weight = float(self.ui.lneWeight.text())
+		self.bmi = 0
 
+	def weight_changed(self):
+		try:
+			self.weight = float(self.ui.lneWeight.text())
+		except:
+			self.weight = 0
+
+	def height_changed(self):
+		try:
+			self.height = float(self.ui.lneHeight.text())
+		except:
+			self.height = 0
+
+	def calc_clicked(self):
+		self.bmi = self.weight/(pow((self.height/100),2))
+		self.ui.lblResult.setText(f"BMI is {str(round(self.bmi,2))}")
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)

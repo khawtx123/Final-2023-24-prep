@@ -48,9 +48,57 @@ def mul_of_odss_recursive(n):
     else: return (2*n-1)*mul_of_odss_recursive(n-1)
 def mul_of_odds_reduction(n):
     lst = []
-    for i in range(1,2*(n+1)-1):
+    for i in range(1,2*(n)):
         if isOdd(i): lst.append(i)
     return reduce(lambda x,y: x*y, lst)
 
-print(mul_of_odds_reduction(3))
-print(mul_of_odss_recursive(3))
+print(mul_of_odds_reduction(4))
+print(mul_of_odss_recursive(4))
+
+
+class Shapes:
+    def __init__(self, b, h):
+        self.b = b
+        self.h = h
+    def calcArea(self):
+        return self.b * self.h
+
+class Circle(Shapes):
+    def __init__(self, b, h):
+        Shapes.__init__(self, b, h)
+
+    def calcArea(self):
+        return (2*3.142*self.b)
+
+class Sphere:
+    def __init__(self, radius):
+        self.radius = radius
+        self.volume = self.calcVolume()
+
+    def calcVolume(self):
+        return ((4/3)*3.142*pow(self.radius, 3))
+
+    def __eq__(self, other):
+        return other.volume == self.volume
+
+    def __str__(self):
+        str = f"Radius is {self.radius}, Volume is {self.volume}"
+        return str
+
+    def __mul__(self, other):
+        vol = self.volume*other
+        radius = pow((3*vol)/(4*3.142), 1/3)
+        return Sphere(radius)
+
+    def __add__(self, other):
+        vol = self.volume + other.volume
+        radius = pow((3 * vol) / (4 * 3.142), 1 / 3)
+        return Sphere(radius)
+
+
+s1 = Sphere(2)
+s2 = Sphere(2)
+s3 = s1 +s2
+s4 = s1*2
+print(s3)
+print(s4)
