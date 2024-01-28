@@ -35,8 +35,6 @@
 # It's important to note that the choice between Python and C++ depends on the project requirements. While Python is often preferred for tasks like web development, data analysis, and scripting, C++ is commonly used for performance-critical applications, systems programming, game development, and situations where low-level control over hardware is essential. Each language has its strengths, and the best choice depends on the specific needs of the project.
 from functools import reduce
 
-import QtWidgets as QtWidgets
-
 
 def cube(n):
     while True:
@@ -96,18 +94,18 @@ class Polynomial:
             x = -(i + 1) #-1, -2, -3
             power = x+len(self.coefficients)
             if not first_term:
-                if power>1: output += f"{self.coefficients[x]}x^{power}"
-                elif power==1: output += f"{self.coefficients[x]}x"
+                if power > 1: output += f"{self.coefficients[x]}x^{power}"
+                elif power == 1: output += f"{self.coefficients[x]}x"
                 else: output += f"{self.coefficients[x]}"
                 first_term = True
             else:
-                if self.coefficients[x] >0: output += "+"
-                else: output += "-"
-                if power>1: output += f"{self.coefficients[x]}x^{power}"
-                elif power==1: output += f"{self.coefficients[x]}x"
+                if self.coefficients[x] >= 0: output += "+"
+                else: output += ""
+                if power > 1: output += f"{self.coefficients[x]}x^{power}"
+                elif power == 1: output += f"{self.coefficients[x]}x"
                 else: output += f"{self.coefficients[x]}"
 
-            self.reversed_coefficients.append(coefficients[x])
+            self.reversed_coefficients.append(self.coefficients[x])
             self.power.append(power)
 
         return output
@@ -154,13 +152,20 @@ class Polynomial:
         p2 = Polynomial(new_coefficients)
         print(p2)
         return p2
-coefficients = [1, 2, 3, 4]
-eqn = Polynomial(coefficients)
-print(eqn)
-eqn.eval(3)
+# coefficients = [1, 2, 3, 4]
+# eqn = Polynomial(coefficients)
+# print(eqn)
+# eqn.eval(3)
+#
+# eqn2 = eqn*2
+# eqn3 = eqn/2
+# eqn4 = eqn + eqn2
+# eqn4 -= eqn2
 
-eqn2 = eqn*2
-eqn3 = eqn/2
-eqn4 = eqn + eqn2
-eqn4 -= eqn2
+p1 = Polynomial([1, 2, 3])
+p2 = Polynomial([1, 0, 2, 3])
+p3 = Polynomial([1, 0, -3, 7])
+print(p1)
+print(p2)
+print(p3)
 
